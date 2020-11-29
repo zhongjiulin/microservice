@@ -7,13 +7,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
- * <p>
- *  服务实现类
- * </p>
- *
- * @author 钟玖林10265666
- * @since 2020-11-28
+ * @Author 钟玖林
+ * @Date 2020/11/29 9:35
+ * @Version 1.0
  */
+
 @Service
 public class UserMapperImpl extends ServiceImpl<UserRepository, User> implements IUserMapper {
 

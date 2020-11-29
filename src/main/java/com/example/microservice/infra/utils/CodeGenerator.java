@@ -10,6 +10,12 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @Author 钟玖林
+ * @Date 2020/11/29 9:35
+ * @Version 1.0
+ */
+
 public class CodeGenerator {
     public static void main(String[] args) {
         // ================= 必须修改的配置 start =================

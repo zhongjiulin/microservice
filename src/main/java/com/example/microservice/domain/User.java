@@ -1,21 +1,21 @@
 package com.example.microservice.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.example.microservice.app.dto.UserDTO;
 import com.example.microservice.domain.BaseEntity;
 import java.time.LocalDate;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.github.dozermapper.core.DozerBeanMapperBuilder;
+import com.github.dozermapper.core.Mapper;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
- * <p>
- * 
- * </p>
- *
- * @author 钟玖林10265666
- * @since 2020-11-28
+ * @Author 钟玖林
+ * @Date 2020/11/29 9:34
+ * @Version 1.0
  */
 @Data
 @ToString(callSuper = true)
@@ -56,4 +56,8 @@ public class User extends BaseEntity {
      */
     private String cityid;
 
+    public static User build(UserDTO userDTO) {
+        Mapper mapper = DozerBeanMapperBuilder.buildDefault();
+        return mapper.map(userDTO, User.class);
+    }
 }
