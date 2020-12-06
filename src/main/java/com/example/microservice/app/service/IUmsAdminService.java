@@ -1,7 +1,7 @@
 package com.example.microservice.app.service;
 
-import com.example.microservice.app.dto.UserDTO;
-import com.example.microservice.domain.User;
+import com.example.microservice.app.dto.UmsAdminDTO;
+import com.example.microservice.domain.UmsAdmin;
 
 import java.util.List;
 
@@ -10,24 +10,24 @@ import java.util.List;
  * @Date 2020/11/29 10:00
  * @Version 1.0
  */
-public interface IUserService {
+public interface IUmsAdminService {
     /**
      * 获取所有用户
      * @return
      */
-    List<UserDTO> getAll();
+    List<UmsAdminDTO> getAll();
 
     /**
      * 根据id获取用户
      * @param id
      * @return
      */
-    UserDTO getOne(Long id);
+    UmsAdminDTO getOne(Long id);
 
     /**
      * 添加用户
      * @param userDTO
      * @return
      */
-    User insert(UserDTO userDTO);
+    UmsAdmin insert(UmsAdminDTO userDTO);
 }

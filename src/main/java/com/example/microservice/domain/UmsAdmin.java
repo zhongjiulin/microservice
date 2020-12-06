@@ -1,63 +1,66 @@
 package com.example.microservice.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.example.microservice.app.dto.UserDTO;
-import com.example.microservice.domain.BaseEntity;
-import java.time.LocalDate;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.example.microservice.app.dto.UmsAdminDTO;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
- * @Author 钟玖林
- * @Date 2020/11/29 9:34
- * @Version 1.0
+ * <p>
+ * 后台用户表
+ * </p>
+ *
+ * @author 钟玖林10265666
+ * @since 2020-12-06
  */
 @Data
-@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class User extends BaseEntity {
+public class UmsAdmin extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键
-     */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    /**
-     * 年龄
-     */
-    private Long age;
+    private String username;
 
-    /**
-     * 名字
-     */
-    private String name;
-
-    /**
-     * 密码
-     */
     private String password;
 
     /**
-     * 描述
+     * 头像
      */
-    private String description;
+    private String icon;
 
     /**
-     * 城市id
+     * 邮箱
      */
-    private String cityid;
+    private String email;
 
-    public static User build(UserDTO userDTO) {
+    /**
+     * 昵称
+     */
+    private String nickName;
+
+    /**
+     * 备注信息
+     */
+    private String note;
+
+    /**
+     * 帐号启用状态：0->禁用；1->启用
+     */
+    private Integer status;
+
+    public static UmsAdmin build(UmsAdminDTO umsAdminDTO) {
         Mapper mapper = DozerBeanMapperBuilder.buildDefault();
-        return mapper.map(userDTO, User.class);
+        if (umsAdminDTO != null) {
+            return mapper.map(umsAdminDTO, UmsAdmin.class);
+        }
+        return new UmsAdmin();
     }
 }

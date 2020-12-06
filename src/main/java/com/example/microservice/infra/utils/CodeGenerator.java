@@ -34,7 +34,15 @@ public class CodeGenerator {
 
         // 要生成代码的表名配置
         String[] tables = {
-                "user"
+                "ums_admin",
+                "ums_admin_login_log",
+                "ums_role",
+                "ums_permission",
+                "ums_admin_role_relation",
+                "ums_role_permission_relation",
+                "ums_admin_permission_relation",
+                "ums_menu",
+                "ums_role_menu_relation"
         };
 
         // ================= 必须修改的配置 end =================
@@ -77,6 +85,7 @@ public class CodeGenerator {
         pc.setServiceImpl("infra.mapper.impl");
         pc.setEntity("domain");
         pc.setMapper("infra.mapper.repository");
+        pc.setController("app.controller");
         mpg.setPackageInfo(pc);
 
         // 如果模板引擎是 freemarker
