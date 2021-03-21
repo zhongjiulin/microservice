@@ -24,7 +24,7 @@ public class UmsAdmin extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.ID_WORKER)
     private Long id;
 
     private String username;

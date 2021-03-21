@@ -33,7 +33,7 @@ public class PageApiResult<T> extends ApiResult<T> implements Serializable {
     private long pageSize;
 
     public PageApiResult(Page<T> page) {
-        super.setData((T) page.getRecords());
+        this.setData((T) page.getRecords());
         this.setPageNo(page.getCurrent())
                 .setPageSize(page.getSize())
                 .setPageCount(page.getPages())

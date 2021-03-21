@@ -58,6 +58,6 @@ public class UserManageMapperImpl implements UserManageMapper {
 
     @Override
     public void save(UmsAdmin umsAdmin) {
-
+        userManageRepository.save(umsAdmin);
     }
 }

@@ -24,19 +24,14 @@ public class UmsAdminDTO {
     private String username;
     @NotBlank
     private String password;
-
     @ApiModelProperty("头像")
     private String icon;
-
     @ApiModelProperty("邮箱")
     private String email;
-
     @ApiModelProperty("昵称")
     private String nickName;
-
     @ApiModelProperty("备注信息")
     private String note;
-
     @ApiModelProperty("帐号启用状态：0->禁用；1->启用")
     private Integer status;
 

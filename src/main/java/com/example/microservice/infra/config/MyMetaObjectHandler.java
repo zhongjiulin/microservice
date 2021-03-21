@@ -20,8 +20,8 @@ import java.util.function.Supplier;
 public class MyMetaObjectHandler implements MetaObjectHandler {
     private static final String CREATED_BY = "createdBy";
     private static final String UPDATED_BY = "lastUpdatedBy";
-    private static final String CREATED_DATE = "creationDate";
-    private static final String UPDATED_DATE = "lastUpdateDate";
+    private static final String CREATED_DATE = "createdDate";
+    private static final String UPDATED_DATE = "lastUpdatedDate";
     private static final String ENABLED_FLAG = "enabledFlag";
 
     /**
@@ -34,8 +34,8 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
         String operator = "钟玖林";
         fillValue(metaObject, CREATED_BY, () -> operator);
         fillValue(metaObject, UPDATED_BY, () -> operator);
-///        fillValue(metaObject, CREATED_DATE, () -> getDateValue(metaObject.getSetterType(CREATED_DATE)));
-///        fillValue(metaObject, UPDATED_DATE, () -> getDateValue(metaObject.getSetterType(UPDATED_DATE)));
+        fillValue(metaObject, CREATED_DATE, () -> getDateValue(metaObject.getSetterType(CREATED_DATE)));
+        fillValue(metaObject, UPDATED_DATE, () -> getDateValue(metaObject.getSetterType(UPDATED_DATE)));
         fillValue(metaObject, ENABLED_FLAG, () -> "Y");
     }
 

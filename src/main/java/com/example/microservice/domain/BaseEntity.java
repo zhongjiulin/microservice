@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @author 钟玖林10265666
@@ -23,7 +23,7 @@ public class BaseEntity {
     /**
      * 创建时间，创建时采用数据默认值，不进行自动填充
      */
-    protected Date creationDate;
+    protected LocalDateTime createdDate;
 
     /**
      * 最后修改人
@@ -34,8 +34,8 @@ public class BaseEntity {
     /**
      * 最后更新时间，创建时采用数据默认值，不进行自动填充
      */
-    @TableField(value = "last_update_date", fill = FieldFill.UPDATE, update = "now()")
-    protected Date lastUpdateDate;
+    @TableField(value = "last_updated_date", fill = FieldFill.INSERT_UPDATE, update = "now()")
+    protected LocalDateTime lastUpdatedDate;
 
     /**
      * 有效性(Y/N)，该字段必须放最后，不然逻辑删除不起作用
