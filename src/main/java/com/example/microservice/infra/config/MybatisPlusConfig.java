@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@MapperScan("com.example.microservice.infra.mapper.repository")
+@MapperScan({"com.example.microservice.infra.repository.mybatisplus"})
 public class MybatisPlusConfig {
     /**
      * 分页插件

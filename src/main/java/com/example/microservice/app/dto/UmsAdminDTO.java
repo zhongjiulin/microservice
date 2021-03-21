@@ -6,6 +6,7 @@ import com.github.dozermapper.core.Mapper;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +20,9 @@ import java.util.List;
 public class UmsAdminDTO {
     @ApiModelProperty("id")
     private Long id;
-
+    @NotBlank
     private String username;
-
+    @NotBlank
     private String password;
 
     @ApiModelProperty("头像")

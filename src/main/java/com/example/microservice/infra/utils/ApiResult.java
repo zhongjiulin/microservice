@@ -1,5 +1,6 @@
 package com.example.microservice.infra.utils;
 
+import com.example.microservice.infra.constant.HttpStatusEnum;
 import lombok.Data;
 
 /**
@@ -9,42 +10,42 @@ import lombok.Data;
  */
 
 @Data
-public class ApiResult {
+public class ApiResult<T> {
     /**
      * 响应业务状态
      */
-    private Integer status;
+    private String code;
     /**
      * 响应消息
      */
-    private String msg;
+    private String message;
     /**
      * 响应中的数据
      */
-    private Object data;
+    private T data;
 
-    public static ApiResult build(Integer status, String msg) {
-        return new ApiResult(status, msg, null);
-    }
-    public static ApiResult build(Integer status, String msg, Object data) {
-        return new ApiResult(status, msg, data);
-    }
-    public static ApiResult ok() {
-        return new ApiResult(null);
-    }
-    public static ApiResult ok(Object data) {
-        return new ApiResult(data);
+    public ApiResult() {
     }
 
-    private ApiResult() { }
-    private ApiResult(Integer status, String msg, Object data) {
-        this.status = status;
-        this.msg = msg;
+    private ApiResult(String code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
+    private ApiResult(String code, String message, T data) {
+        this(code, message);
         this.data = data;
     }
-    private ApiResult(Object data) {
-        this.status = 200;
-        this.msg = "OK";
-        this.data = data;
+
+    public ApiResult<T> success(T data) {
+        return new ApiResult<>(HttpStatusEnum.C200.getCode(), "ok", data);
+    }
+
+    public ApiResult<T> error(String code, String message) {
+        return new ApiResult<>(code, message);
+    }
+
+    public ApiResult<T> build(String code, String message, T data) {
+        return new ApiResult<>(code, message, data);
     }
 }

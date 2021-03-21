@@ -1,13 +1,14 @@
 package com.example.microservice.infra.config;
 
 
+import com.example.microservice.infra.constant.HttpStatusEnum;
 import com.example.microservice.infra.utils.ApiResult;
+import com.example.microservice.infra.utils.CustomerException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  * @Date 2020/11/29 9:44
  * @Version 1.0
  */
-@RestControllerAdvice(annotations = {RestController.class})
+@RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
     /**
@@ -29,12 +30,23 @@ public class GlobalExceptionHandler {
      * @ExceptionHandler 注解用来配置需要拦截的异常类型, 也可以是自定义异常
      */
     @ExceptionHandler(Exception.class)
-    public Object runtimeExceptionHandler(Exception e) {
+    public ApiResult<String> runtimeExceptionHandler(Exception e) {
+        ApiResult<String> apiResult = new ApiResult();
         // 打印异常信息到控制台
         e.printStackTrace();
         log.error("请求出现异常,异常信息为: {}", e.getMessage());
-        // 使用公共的结果类封装返回结果, 这里我指定状态码为 400
-        return ApiResult.build(400, e.getMessage());
+        // 使用公共的结果类封装返回结果, 这里我指定状态码为 500
+        return apiResult.error(HttpStatusEnum.C500.getCode(), e.getMessage());
+    }
+
+    @ExceptionHandler(CustomerException.class)
+    public ApiResult<String> customerExceptionHandler(CustomerException e) {
+        ApiResult<String> apiResult = new ApiResult();
+        // 打印异常信息到控制台
+        e.printStackTrace();
+        log.error("请求出现异常,异常信息为: {}", e.getMessage());
+        // 使用公共的结果类封装返回结果, 这里我指定状态码为 500
+        return apiResult.error(HttpStatusEnum.C500.getCode(), e.getMessage());
     }
 
     /**
@@ -43,10 +55,11 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ApiResult handleBindException(MethodArgumentNotValidException ex) {
+    public ApiResult<String> handleBindException(MethodArgumentNotValidException ex) {
+        ApiResult<String> apiResult = new ApiResult();
         FieldError fieldError = ex.getBindingResult().getFieldError();
         log.info("参数校验异常:{}({})", fieldError.getDefaultMessage(),fieldError.getField());
-        return ApiResult.build(400, fieldError.getDefaultMessage());
+        return apiResult.error(HttpStatusEnum.C500.getCode(), fieldError.getDefaultMessage());
     }
 
     /**
@@ -55,9 +68,10 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(BindException.class)
-    public ApiResult handleBindException(BindException ex) {
+    public ApiResult<String> handleBindException(BindException ex) {
+        ApiResult<String> apiResult = new ApiResult();
         FieldError fieldError = ex.getBindingResult().getFieldError();
         log.info("参数校验异常:{}({})", fieldError.getDefaultMessage(),fieldError.getField());
-        return ApiResult.build(400, fieldError.getDefaultMessage());
+        return apiResult.error(HttpStatusEnum.C500.getCode(), fieldError.getDefaultMessage());
     }
 }
