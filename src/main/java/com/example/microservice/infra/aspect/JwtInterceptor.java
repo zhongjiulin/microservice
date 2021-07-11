@@ -11,6 +11,9 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 /**
  * @Author 钟玖林
@@ -23,7 +26,7 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
     private JwtConfig jwtConfig;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
         // 这里是个坑，因为带请求带headers时，ajax会发送两次请求，
         // 第一次会发送OPTIONS请求，第二次才会发生get/post请求，所以要放行OPTIONS请求
         // 如果是OPTIONS请求，让其响应一个 200状态码，说明可以正常访问
@@ -41,7 +44,7 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
         boolean verify = false;
         String errMsg = "";
         // 获取header中的token
-        String token = request.getHeader("Authorization");
+        String token = request.getHeader("token");
         log.info("请求携带的token={}", token);
         try {
             verify = JwtUtil.verify(token, jwtConfig);
@@ -49,6 +52,7 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
             errMsg = e.getMessage();
             log.error("token验证失败,errMsg={}", errMsg);
         }
+
         // 验证token，如果验证失败就重定向到未登录页面 ---打开会连swagger页面都打不开
 //        if (!verify) {
 //            errMsg = URLEncoder.encode(errMsg, "UTF-8");

@@ -59,28 +59,6 @@ public class JwtUtil {
         return JWT.create().withClaim("username", username)
                 .withExpiresAt(date).sign(algorithm);
     }
-
-    public static boolean isPalindrome(int x) {
-        if(x < 0 || x <= Integer.MIN_VALUE) {
-            return false;
-        }
-        int start = x;
-        int end = 0;
-        while (x != 0) {
-            int pop = x % 10;
-            x /= 10;
-            if (x > Integer.MIN_VALUE || (x == Integer.MAX_VALUE && pop == 7)) return false;
-            end = end * 10 + pop;
-        }
-        if (start == end) {
-            return true;
-        }
-        return false;
-    }
-
-    public static void main(String[] args) {
-        isPalindrome(121);
-    }
 }
 
 

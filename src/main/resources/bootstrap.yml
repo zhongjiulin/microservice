@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: shop-user-8080
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 42.192.251.248:8848
+      config:
+        server-addr: 42.192.251.248:8848
+        file-extension: yaml ## 配置文件的后缀
+        group: DEFAULT_GROUP ## group组

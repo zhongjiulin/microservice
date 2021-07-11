@@ -35,9 +35,9 @@ public class UserManageController {
     @ApiOperation(value = "登录以后返回token")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public ApiResult<String> login(@Validated @RequestBody UmsAdminDTO umsAdminLoginParam) {
+    public ApiResult<String> login(@RequestParam String userName, @RequestParam String password) {
         ApiResult<String> apiResult = new ApiResult<>();
-        String token = umsAdminService.login(umsAdminLoginParam.getUsername(), umsAdminLoginParam.getPassword());
+        String token = umsAdminService.login(userName, password);
         if (StrUtil.isBlank(token)) {
             return apiResult.error(HttpStatusEnum.C403.getCode(), HttpStatusEnum.C403.getMessage());
         }

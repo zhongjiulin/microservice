@@ -33,6 +33,6 @@ public class WebConfig implements WebMvcConfigurer {
         // 需拦截的路径
         interceptorRegistration.addPathPatterns("/**");
         // 需放行的路径
-        interceptorRegistration.excludePathPatterns("/**/login", "/**/unlogin", "/error");
+        interceptorRegistration.excludePathPatterns("/**/login", "/**/unlogin", "/error", "/swagger-ui.html/**");
     }
 }
